@@ -16,28 +16,34 @@ import Search from "../Common/Search";
 function Companies() {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   /** gets initial companies on mount */
-  useEffect(function getInitialCompanies() {
-  getAllCompanies();
-  setIsLoading(false)
-}, []);
+  useEffect(
+    function getInitialCompanies() {
+      async function getAllCompanies(searchTerm) {
+        let companies = await JoblyApi.getCompanies(searchTerm || undefined);
+        setCompanies(companies);
+      }
+      getAllCompanies(searchTerm);
+      setIsLoading(false);
+    },
+    [searchTerm]
+  );
 
+  function changeSearchTerm(term) {
+    setSearchTerm(term);
+  }
+  /** gets company from api */
 
-/** gets company from api */
-async function getAllCompanies(name) {
-  let companies = await JoblyApi.getCompanies(name);
-  setCompanies(companies);
-}
-  if(isLoading) return <h1>loading...</h1>
+  if (isLoading) return <h1>loading...</h1>;
 
   return (
     <div>
-      < Search search={getAllCompanies} />
-        {companies.map((company) => 
-          <CompanyCard key={company.handle} company={company} />
-          )
-        }
+      <Search changeSearchTerm={changeSearchTerm} searchTerm={searchTerm} />
+      {companies.map((company) => (
+        <CompanyCard key={company.handle} company={company} />
+      ))}
     </div>
   );
 }

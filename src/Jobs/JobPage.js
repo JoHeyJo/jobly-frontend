@@ -10,25 +10,32 @@ import Search from "../Common/Search";
  */
 function JobPage() {
   const [jobs, setJobs] = useState(null);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(function getJobs() {
-    getJobsAxios();
-  }, []);
-  
-/** get job from api */
-  async function getJobsAxios(name) {
-    const jobs = await JoblyApi.getJobs(name);
-    setJobs(jobs);
-    setIsLoading(false)
+  useEffect(
+    function getJobs() {
+      async function getJobsAxios(searchTerm) {
+        const jobs = await JoblyApi.getJobs(searchTerm || undefined);
+        setJobs(jobs);
+        setIsLoading(false);
+      }
+      getJobsAxios(searchTerm);
+    },
+    [searchTerm]
+  );
+
+  function changeSearchTerm(term) {
+    setSearchTerm(term);
+    console.log(term);
   }
+  /** get job from api */
 
   if (isLoading) return <div>Loading...</div>;
   return (
-
     <div>
       <div>
-        <Search search={getJobsAxios} />
+        <Search changeSearchTerm={changeSearchTerm} searchTerm={searchTerm} />
       </div>
       <JobsList jobs={jobs} />
     </div>
