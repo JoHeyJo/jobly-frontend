@@ -1,14 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
-import JoblyApi from "./api";
-import Homepage from "./Homepage";
-import Companies from "./Companies"
+import { BrowserRouter } from "react-router-dom";
+import RoutesList from "./Routes/RoutesList";
+import Navagation from "./Routes/Navagation";
 
 function App() {
   return (
     <div className="App">
-      <Homepage />
-      <Companies />
+      <BrowserRouter>
+        <Navagation />
+        <RoutesList />
+      </BrowserRouter>
     </div>
   );
 }
