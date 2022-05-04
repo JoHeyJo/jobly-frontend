@@ -1,27 +1,37 @@
-app: no props or state | General Page wrapper + Router
+app: state=User | General Page wrapper + Router
+UserContext.Provider(
 
-    homepage:
+    Routes:
 
-    JobsPage: state= jobs + form data                   | renders searchable list of job components
+        Login: state= form data                             | Updates user state
+
+        Sign Up: state= form data                           | Updates user state
+
+
+    Navigation: context=User                            | Not logged in: Login, SignUp| Logged in: Companies, Jobs, Profile, LogOut
+
+        homepage: context=User                              | Link to login and signup or (if logged in) renders greeting
+
+        Profile: context=User state=form data               | form to update User
+
+        JobsPage: state= jobs + form data                   | renders searchable list of job components
 
         JobsList: prop=jobs                             | renders job cards
 
-             Job: prop= job                             | displays job card
+             Job: prop= job  context=User               | displays job card
 
         search: prop=(update formData function)         |
 
-    Companies: state= companies + form data             | renders searchable list of company card components (link to CompanyDetail page)
+        Companies: state= companies + form data             | renders searchable list of company card components (link to CompanyDetail page)
 
         companyCardComponent: prop= company             | renders company card with link to company detail page
 
         search: prop=(update formData function)         |
 
-    CompanyDetail: state=company                        | renders job components
+        CompanyDetail: state=company                        | renders job components
 
         JobsList: prop=jobs                             | renders job cards
 
-            Job: prop=job                               | displays job card
+            Job: prop=job  context=User                 | displays job card
 
-
-// return in empty search bar for companies/jobs
-// move function inside useEffect companies/jobs
+)
