@@ -1,0 +1,11 @@
+.CompanyCard {
+  background-color: white;
+  border: 1px solid;
+  max-width: 500px;
+  max-height: 250px;
+  margin-bottom: 10px;
+}
+
+.CompanyList {
+  display: inline-block;
+}

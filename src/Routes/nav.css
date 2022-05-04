@@ -1,0 +1,16 @@
+.Nav {
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  
+}
+.nav-right {
+  justify-content: end;
+  margin-right: 5px;
+}
+
+.link {
+  margin: 10px;
+  text-decoration: none;
+}

@@ -1,4 +1,6 @@
 import React from "react";
+import "./jobCard.css"
+
 
 /**
  * displays job card
@@ -7,7 +9,7 @@ import React from "react";
  */
 function JobCard({ job }) {
   return (
-    <div>
+    <div className="JobCard">
       <h3>{job.title}</h3>
       <h3>{job.companyName}</h3>
       <h4>salary: {job.salary}</h4>

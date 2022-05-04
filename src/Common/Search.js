@@ -1,5 +1,6 @@
 import { useState } from "react";
 import React from "react";
+import "./search.css"
 
 /** Search function, returns company or job
  *
@@ -17,8 +18,8 @@ function Search({ changeSearchTerm, searchTerm }) {
     changeSearchTerm(evt.target.value);
   }
   return (
-    <form>
-      <label forHtml="searchTerm">Search: </label>
+    <form className="Search">
+      <label forhtml="searchTerm">Search: </label>
       <input
         name="searchTerm"
         value={searchTerm}

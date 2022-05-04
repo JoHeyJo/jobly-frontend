@@ -8,7 +8,7 @@ import JobCard from "./JobCard";
  */
 function JobsList({ jobs }) {
   return (
-    <div>
+    <div className="JobList">
       {jobs.map((job) => (
         <JobCard key={job.id} job={job} />
       ))}
