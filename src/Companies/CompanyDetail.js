@@ -5,10 +5,12 @@ import { useParams } from "react-router-dom";
 
 /**
  * Gets company details and list of jobs from company
- * @returns Company Details + Jobslist
+ * 
+ * state: Company Details + Jobslist
  */
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
+  const [isLoading, setIsLoading] = useState(true)
   const { handle } = useParams();
 
   useEffect(
@@ -16,6 +18,7 @@ function CompanyDetail() {
       async function getCompanyAxios() {
         const company = await JoblyApi.getCompany(handle);
         setCompany(company);
+        setIsLoading(false)
       }
       getCompanyAxios();
     },
@@ -23,7 +26,7 @@ function CompanyDetail() {
   );
   console.log(company);
 
-  if (!company) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>

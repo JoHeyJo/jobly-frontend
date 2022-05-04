@@ -21,3 +21,7 @@ app: no props or state | General Page wrapper + Router
         JobsList: prop=jobs                             | renders job cards
 
             Job: prop=job                               | displays job card
+
+
+// return in empty search bar for companies/jobs
+// move function inside useEffect companies/jobs
