@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../Auth/UserContext";
-
+import "./Profile.css";
 
 /** get user date and updates
- * 
+ *
  * state: formData, message
- * 
+ *
  * context: currentUser
- * 
+ *
  */
 function ProfileForm() {
   const { currentUser, setUser } = useContext(UserContext);
@@ -19,9 +19,8 @@ function ProfileForm() {
   });
   const [message, setMessage] = useState(null);
 
-
   /**  updates updateData state */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     const updateData = {
       firstName: formData.firstName,
@@ -29,14 +28,15 @@ function ProfileForm() {
       email: formData.email,
     };
     try {
-      setUser(updateData);
+      await setUser(updateData);
     } catch (err) {
+      console.log(err);
       setMessage(err);
+      return;
     }
 
     setMessage("Updated Successfully");
   }
-
 
   /** update formDate state */
   function handleChange(evt) {
@@ -45,33 +45,50 @@ function ProfileForm() {
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label forhtml="username">Username: </label>
-        <input disabled name="username" value={formData.username} />
-        <label forhtml="password">Password: </label>
+      <form className="formDisplay" onSubmit={handleSubmit}>
+        <label forhtml="username">Username </label>
         <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
+          className="input"
+          disabled
+          name="username"
+          value={formData.username}
         />
-        <label forhtml="firstName">First Name: </label>
+        <label forhtml="firstName">First Name </label>
         <input
+          className="input"
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
         />
-        <label forhtml="lastName">Last Name: </label>
+        <label forhtml="lastName">Last Name </label>
         <input
+          className="input"
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
         />
-        <label forhtml="email">Email: </label>
-        <input name="email" value={formData.email} onChange={handleChange} />
+        <label forhtml="email">Email </label>
+        <input
+          className="input"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
         <button>Edit User</button>
       </form>
-      <h3>{message}</h3>
+      {message &&
+        message.map((msg) => (
+          <h4
+            className="alert alert-danger"
+            style={{
+              marginLeft: "700px",
+              marginRight: "700px",
+              marginTop: "15px",
+            }}
+          >
+            {msg}
+          </h4>
+        ))}
     </div>
   );
 }

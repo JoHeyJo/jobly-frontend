@@ -1,23 +1,22 @@
-import { useState } from "react";
 import React from "react";
-import "./search.css"
+import "./search.css";
 
 /** Search function, returns company or job
  *
- *props: search term, search (parent function) 
+ *props: search term, search (parent function)
  *
  * { Companies, JobPage } -> Search
  */
 function Search({ changeSearchTerm, searchTerm }) {
-
   /** submits search term, calls parent function */
   function handleChange(evt) {
     changeSearchTerm(evt.target.value);
   }
   return (
     <form className="Search">
-      <label forhtml="searchTerm">Search: </label>
       <input
+        className="searchBar"
+        placeholder="Search"
         name="searchTerm"
         value={searchTerm}
         onChange={handleChange}

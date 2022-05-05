@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./companyCard.css"
+import "./companyCard.css";
 
 /** Creates Company card
  *
@@ -12,11 +12,11 @@ import "./companyCard.css"
 function CompanyCard({ company }) {
   console.log(company);
   return (
-    <Link to={`/companies/${company.handle}`}>
+    <Link className="link" to={`/companies/${company.handle}`}>
       <div className="CompanyCard">
-        <h4>{company.name}</h4>
+        <h4 className="link">{company.name}</h4>
         <img src={company.logoUrl} alt=""></img>
-        <p>{company.description}</p>
+        <p className="link">{company.description}</p>
         <span style={{ padding: "5px" }} />
       </div>
     </Link>

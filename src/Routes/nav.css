@@ -1,9 +1,9 @@
 .Nav {
-  background-color: lightgray;
+  background-color: #e7ecef;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 5px;
-  
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 .nav-right {
   justify-content: end;
@@ -13,4 +13,5 @@
 .link {
   margin: 10px;
   text-decoration: none;
+  color: #0d4b74;
 }

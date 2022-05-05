@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import "./Sign.css";
 
 /** Sign in user
- * 
+ *
  * prop: signIn parent function
- * 
+ *
  * state: formData
- * 
+ *
  * Aop -> SignIn
  */
 function SignIn({ signIn }) {
@@ -13,32 +14,39 @@ function SignIn({ signIn }) {
     username: "",
     password: "",
   });
+  const [message, setMessage] = useState(null);
 
   /** submits form data calls parent function */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signIn(formData);
+    try {
+      await signIn(formData);
+      setMessage(null);
+    } catch (err) {
+      setMessage(err);
+    }
   }
-
 
   //catch error...
 
-/** update fromData state on change */
+  /** update fromData state on change */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({ ...data, [name]: value }));
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label forhtml="username">Username: </label>
+      <form className="formDisplay" onSubmit={handleSubmit}>
+        <label forhtml="username">Username </label>
         <input
+          className="input"
           name="username"
           value={formData.username}
           onChange={handleChange}
         />
-        <label forhtml="password">Password: </label>
+        <label forhtml="password">Password </label>
         <input
+          className="input"
           type="password"
           name="password"
           value={formData.password}
@@ -47,6 +55,16 @@ function SignIn({ signIn }) {
 
         <button>Sign In</button>
       </form>
+      <p
+        className="alert alert-danger"
+        style={{
+          marginLeft: "700px",
+          marginRight: "700px",
+          marginTop: "15px",
+        }}
+      >
+        {message}
+      </p>
     </div>
   );
 }

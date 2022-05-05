@@ -7,17 +7,16 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
-
 /** Jobyly App
- * 
+ *
  * state: user, token
- * 
+ *
  */
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("Token"));
-  const [isLoading, setIsLoading] = useState(true)
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [location, setLocation] = useState(null);
 
   /** updates user state on mount, on token change */
   useEffect(
@@ -35,10 +34,12 @@ function App() {
             setUser(null);
             console.log(err);
           }
+        } else {
+          setIsLoading(false);
         }
       }
       getUser();
-      },
+    },
     [token]
   );
 
@@ -57,7 +58,7 @@ function App() {
   }
 
   /** logout user */
-  function logout(){
+  function logout() {
     setUser(null);
     localStorage.removeItem("Token");
     setToken(null);
@@ -82,8 +83,11 @@ function App() {
       applications: [...user.applications, jobId],
     }));
   }
+  function updateLocation(location) {
+    setLocation(location);
+  }
 
-  if(isLoading) return <h1>loading...</h1>
+  if (isLoading) return <h1>loading...</h1>;
 
   return (
     <div className="App">
@@ -95,8 +99,17 @@ function App() {
             setApplications: setApps,
           }}
         >
-          <Navigation logout={logout} />
-          <RoutesList signUp={signUp} signIn={signIn} isLoading={isLoading} user={user} />
+          <Navigation
+            logout={logout}
+            updateLocation={updateLocation}
+            location={location}
+          />
+          <RoutesList
+            signUp={signUp}
+            signIn={signIn}
+            isLoading={isLoading}
+            user={user}
+          />
         </UserContext.Provider>
       </BrowserRouter>
     </div>
