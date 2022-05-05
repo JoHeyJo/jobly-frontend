@@ -1,8 +1,8 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./Routes/RoutesList";
-import Navagation from "./Routes/Navagation";
-import UserContext from "./UserContext";
+import Navigation from "./Routes/Navigation";
+import UserContext from "./Auth/UserContext";
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
@@ -10,15 +10,21 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [User, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("Token"));
+  const [applications, setApplications] = useState([])
 
   useEffect(
     function decodeToken() {
       async function getUser() {
         if (token) {
-          const { username } = jwt_decode(token);
-          JoblyApi.token = token;
-          const user = await JoblyApi.getUser(username);
-          setUser(user);
+          try{
+            const { username } = jwt_decode(token);
+            JoblyApi.token = token;
+            const user = await JoblyApi.getUser(username);
+            setUser(user);
+          } catch (err) {
+            setUser(null)
+              console.log(err)
+          }
         }
       }
       getUser();
@@ -38,11 +44,22 @@ function App() {
     localStorage.setItem("Token", token);
   }
 
+  function updateUser(){
+
+  }
+
+
+  function setApps(){
+
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Navagation />
-        <RoutesList signUp={signUp} signIn={signIn} />
+        <UserContext.Provider value={{ currentUser: User, setUser:updateUser, setApplications:setApps, applications }}>
+          <Navigation />
+          <RoutesList signUp={signUp} signIn={signIn} user={User} />
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

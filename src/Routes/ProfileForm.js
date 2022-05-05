@@ -1,17 +1,27 @@
-import React, { useState } from "react";
+import React, {useState, useContext } from "react";
+import UserContext from "../Auth/UserContext";
+import JoblyApi from "../api";
 
-function SignUp({ signUp }) {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-  });
 
-  function handleSubmit(evt) {
+
+function ProfileForm(){
+  const { currentUser, setUser } = useContext(UserContext);
+  const [formData, setFormData] = useState({ 
+    firstName: currentUser.firstName,
+    lastName: currentUser.lastName,
+    email: currentUser.email,
+    username: currentUser.username
+  })
+
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signUp(formData);
+    const updateData = {
+                        firstName: formData.firstName, 
+                        lastName: formData.lastName, 
+                        email: formData.email
+                      }
+    const user = await JoblyApi.update(formData.username, updateData);
+    setUser(user);
   }
 
   function handleChange(evt) {
@@ -23,10 +33,9 @@ function SignUp({ signUp }) {
       <form onSubmit={handleSubmit}>
         <label forhtml="username">Username: </label>
         <input
+          disabled
           name="username"
           value={formData.username}
-          onChange={handleChange}
-          required
         />
         <label forhtml="password">Password: </label>
         <input
@@ -34,28 +43,25 @@ function SignUp({ signUp }) {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          required
         />
         <label forhtml="firstName">First Name: </label>
         <input
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
-          required
         />
         <label forhtml="lastName">Last Name: </label>
         <input
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
-          required
         />
         <label forhtml="email">Email: </label>
         <input name="email" value={formData.email} onChange={handleChange} />
-        <button>Sign Up</button>
+        <button>Edit User</button>
       </form>
     </div>
   );
 }
 
-export default SignUp;
+export default ProfileForm;

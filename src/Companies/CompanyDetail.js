@@ -36,7 +36,7 @@ function CompanyDetail() {
         <h3>{company.description}</h3>
       </div>
       <h2>Jobs</h2>
-      <JobsList jobs={company.jobs} />
+      {/* <JobsList jobs={company.jobs} /> */}
     </div>
   );
 }

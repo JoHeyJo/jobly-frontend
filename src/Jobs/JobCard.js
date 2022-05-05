@@ -1,13 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./jobCard.css"
-
+import UserContext from "../Auth/UserContext";
 
 /**
  * displays job card
- * @param {obj} param0
- * @returns html
+ * 
+ * props job
+ * 
+ * context: UserContext
  */
 function JobCard({ job }) {
+
+const { applications, setApplications } = useContext(UserContext);
+
+  function handleApply(evt){
+    evt.preventDefault();
+    setApplications(applications => ([...applications, job.id ] ))
+  }
+
   return (
     <div className="JobCard">
       <h3>{job.title}</h3>
@@ -15,8 +25,16 @@ function JobCard({ job }) {
       <h4>salary: {job.salary}</h4>
       <h4>equity: {job.equity}</h4>
       <span style={{ padding: "5px" }} />
+      {applications.includes(job.id)
+      ?
+      <button disabled >Applied</button>
+      :
+      <button onClick={handleApply}>Apply</button>
+      }
+
     </div>
   );
 }
 
 export default JobCard;
+ 

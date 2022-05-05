@@ -35,3 +35,6 @@ UserContext.Provider(
             Job: prop=job  context=User                 | displays job card
 
 )
+
+// add functions 
+// delete user
