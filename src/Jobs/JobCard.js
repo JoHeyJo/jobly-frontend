@@ -7,12 +7,18 @@ import UserContext from "../Auth/UserContext";
  *
  * props job
  *
+ * state message
+ * 
  * context: UserContext
+ * 
+ * 
  */
 function JobCard({ job }) {
   const { currentUser, setApplications } = useContext(UserContext);
   const [message, setMessage] = useState(null);
 
+
+  /** setApplication state with id, and show message */
   function handleApply(evt) {
     evt.preventDefault();
     try {

@@ -2,7 +2,11 @@ import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import UserContext from "./Auth/UserContext";
 
-/**  Landing page */
+/**  Landing page 
+ * 
+ * context: currentUser
+ * 
+*/
 function Homepage() {
 
   const { currentUser }  = useContext(UserContext);

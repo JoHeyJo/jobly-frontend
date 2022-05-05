@@ -7,10 +7,19 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
-function App() {
-  const [User, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("Token"));
 
+/** Jobyly App
+ * 
+ * state: user, token
+ * 
+ */
+function App() {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("Token"));
+  const [isLoading, setIsLoading] = useState(true)
+
+
+  /** updates user state on mount, on token change */
   useEffect(
     function decodeToken() {
       async function getUser() {
@@ -19,40 +28,54 @@ function App() {
             const { username } = jwt_decode(token);
             JoblyApi.token = token;
             const user = await JoblyApi.getUser(username);
+            setIsLoading(false);
             setUser(user);
           } catch (err) {
+            setIsLoading(false);
             setUser(null);
             console.log(err);
           }
         }
       }
       getUser();
-    },
+      },
     [token]
   );
 
+  /** signup user, updates db */
   async function signUp(signUpData) {
     let token = await JoblyApi.signUp(signUpData);
     setToken(token);
     localStorage.setItem("Token", token);
   }
 
+  /** sign in user, updates db */
   async function signIn(signInData) {
     let token = await JoblyApi.signIn(signInData);
     setToken(token);
     localStorage.setItem("Token", token);
   }
 
+  /** logout user */
+  function logout(){
+    setUser(null);
+    localStorage.removeItem("Token");
+    setToken(null);
+    setIsLoading(false);
+  }
+
+  /** update user state, updates db */
   async function updateUser(data) {
-    await JoblyApi.update(User.username, data);
+    await JoblyApi.update(user.username, data);
     setUser((user) => ({
       ...user,
       data,
     }));
   }
 
+  /** sets user state applications, updates db  */
   async function setApps(jobId) {
-    await JoblyApi.apply(User.username, jobId);
+    await JoblyApi.apply(user.username, jobId);
 
     setUser((user) => ({
       ...user,
@@ -60,18 +83,20 @@ function App() {
     }));
   }
 
+  if(isLoading) return <h1>loading...</h1>
+
   return (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
           value={{
-            currentUser: User,
+            currentUser: user,
             setUser: updateUser,
             setApplications: setApps,
           }}
         >
-          <Navigation />
-          <RoutesList signUp={signUp} signIn={signIn} user={User} />
+          <Navigation logout={logout} />
+          <RoutesList signUp={signUp} signIn={signIn} isLoading={isLoading} user={user} />
         </UserContext.Provider>
       </BrowserRouter>
     </div>

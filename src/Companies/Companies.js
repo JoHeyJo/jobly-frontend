@@ -6,10 +6,7 @@ import "./companyCard.css";
 
 /** Shows list of companies
  *
- * state: [{companies}] , formData
- *
- * props: company, search
- *
+ * state: [{companies}] , formData, isLoading, message
  *
  * Companies ->  {CompanyCard, Search}
  */
@@ -18,13 +15,20 @@ function Companies() {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [message, setMessage] = useState(null)
 
   /** gets initial companies on mount */
   useEffect(
     function getInitialCompanies() {
+
       async function getAllCompanies(searchTerm) {
-        let companies = await JoblyApi.getCompanies(searchTerm || undefined);
-        setCompanies(companies);
+        try{
+          let companies = await JoblyApi.getCompanies(searchTerm || undefined);
+          setCompanies(companies);
+          setMessage(null)
+        } catch (err){
+          setMessage(err)
+        }
       }
       getAllCompanies(searchTerm);
       setIsLoading(false);
@@ -32,16 +36,17 @@ function Companies() {
     [searchTerm]
   );
 
+  /** setSearchTerm state  */
   function changeSearchTerm(term) {
     setSearchTerm(term);
   }
-  /** gets company from api */
 
   if (isLoading) return <h1>loading...</h1>;
 
   return (
     <div>
       <Search changeSearchTerm={changeSearchTerm} searchTerm={searchTerm} />
+      <p className="error">{message}</p>
       <div className="CompanyList">
         {companies.map((company) => (
           <div key={company.handle}>

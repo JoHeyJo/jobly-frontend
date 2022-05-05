@@ -6,12 +6,17 @@ import JobPage from "../Jobs/JobPage";
 import Companies from "../Companies/Companies";
 import SignUp from "../Auth/SignUp";
 import SignIn from "../Auth/SignIn";
-import Profile from "../Profile/ProfileForm";
 import ProfileForm from "../Profile/ProfileForm";
 
-function RoutesList({ signUp, signIn, user }) {
+
+/** Routes for logged in and logged out users
+ * 
+ * props: signUp, signIn, user
+ */
+function RoutesList({ signUp, signIn, user, isLoading }) {
   return (
     <div>
+      {!isLoading &&
       <Routes>
         {!user && (
           <>
@@ -19,7 +24,7 @@ function RoutesList({ signUp, signIn, user }) {
             <Route path="/signin" element={<SignIn signIn={signIn} />} />
           </>
         )}
-        <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<Homepage />} />
         {user && (
           <>
             <Route path="/companies" element={<Companies />} />
@@ -31,6 +36,7 @@ function RoutesList({ signUp, signIn, user }) {
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+      }
     </div>
   );
 }

@@ -3,8 +3,8 @@ import JobCard from "./JobCard";
 
 /**
  * Takes in jobs and renders list of Job components
- * @param {array} jobs
- * @returns JobCard Components
+ * 
+ * props jobs
  */
 function JobsList({ jobs }) {
   return (

@@ -4,14 +4,11 @@ import "./search.css"
 
 /** Search function, returns company or job
  *
- *props: search (parent function)
- *
- * state: search term
+ *props: search term, search (parent function) 
  *
  * { Companies, JobPage } -> Search
  */
 function Search({ changeSearchTerm, searchTerm }) {
-  /** set searchTerm state */
 
   /** submits search term, calls parent function */
   function handleChange(evt) {

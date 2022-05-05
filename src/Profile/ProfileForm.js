@@ -1,6 +1,14 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../Auth/UserContext";
 
+
+/** get user date and updates
+ * 
+ * state: formData, message
+ * 
+ * context: currentUser
+ * 
+ */
 function ProfileForm() {
   const { currentUser, setUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
@@ -11,6 +19,8 @@ function ProfileForm() {
   });
   const [message, setMessage] = useState(null);
 
+
+  /**  updates updateData state */
   function handleSubmit(evt) {
     evt.preventDefault();
     const updateData = {
@@ -27,6 +37,8 @@ function ProfileForm() {
     setMessage("Updated Successfully");
   }
 
+
+  /** update formDate state */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({ ...data, [name]: value }));

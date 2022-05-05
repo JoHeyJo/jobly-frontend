@@ -7,13 +7,14 @@ import "./companyDetail.css";
 /**
  * Gets company details and list of jobs from company
  *
- * state: Company Details + Jobslist
+ * state: Company Details + Jobslist + isLoading
  */
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { handle } = useParams();
 
+  /** gets company from API, setCompany state, on handle change */
   useEffect(
     function getCompany() {
       async function getCompanyAxios() {

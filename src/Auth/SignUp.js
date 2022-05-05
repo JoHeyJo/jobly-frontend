@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 
+/** Sign up user
+ * 
+ * prop: signUp parent function
+ * 
+ * state: formData
+ * 
+ * Aop -> SignUp
+ */
 function SignUp({ signUp }) {
   const [formData, setFormData] = useState({
     username: "",
@@ -9,11 +17,13 @@ function SignUp({ signUp }) {
     email: "",
   });
 
+  /** submits form data calls parent function */
   function handleSubmit(evt) {
     evt.preventDefault();
     signUp(formData);
   }
 
+  /** update fromData state on change */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({ ...data, [name]: value }));
