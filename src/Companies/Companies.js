@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import JoblyApi from "../api";
 import CompanyCard from "./CompanyCard";
 import Search from "../Common/Search";
-import "./companyCard.css"
+import "./companyCard.css";
 
 /** Shows list of companies
  *
@@ -42,11 +42,13 @@ function Companies() {
   return (
     <div>
       <Search changeSearchTerm={changeSearchTerm} searchTerm={searchTerm} />
-      {companies.map((company) => (
-        <div key={company.handle} className="CompanyList">
-          <CompanyCard key={company.handle} company={company} />
-        </div>
-      ))}
+      <div className="CompanyList">
+        {companies.map((company) => (
+          <div key={company.handle}>
+            <CompanyCard key={company.handle} company={company} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

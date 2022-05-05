@@ -1,27 +1,30 @@
-import React, {useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import UserContext from "../Auth/UserContext";
-import JoblyApi from "../api";
 
-
-
-function ProfileForm(){
+function ProfileForm() {
   const { currentUser, setUser } = useContext(UserContext);
-  const [formData, setFormData] = useState({ 
+  const [formData, setFormData] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
     email: currentUser.email,
-    username: currentUser.username
-  })
+    username: currentUser.username,
+  });
+  const [message, setMessage] = useState(null);
 
-  async function handleSubmit(evt) {
+  function handleSubmit(evt) {
     evt.preventDefault();
     const updateData = {
-                        firstName: formData.firstName, 
-                        lastName: formData.lastName, 
-                        email: formData.email
-                      }
-    const user = await JoblyApi.update(formData.username, updateData);
-    setUser(user);
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+    };
+    try {
+      setUser(updateData);
+    } catch (err) {
+      setMessage(err);
+    }
+
+    setMessage("Updated Successfully");
   }
 
   function handleChange(evt) {
@@ -32,11 +35,7 @@ function ProfileForm(){
     <div>
       <form onSubmit={handleSubmit}>
         <label forhtml="username">Username: </label>
-        <input
-          disabled
-          name="username"
-          value={formData.username}
-        />
+        <input disabled name="username" value={formData.username} />
         <label forhtml="password">Password: </label>
         <input
           type="password"
@@ -60,6 +59,7 @@ function ProfileForm(){
         <input name="email" value={formData.email} onChange={handleChange} />
         <button>Edit User</button>
       </form>
+      <h3>{message}</h3>
     </div>
   );
 }

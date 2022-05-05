@@ -10,20 +10,19 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [User, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("Token"));
-  const [applications, setApplications] = useState([])
 
   useEffect(
     function decodeToken() {
       async function getUser() {
         if (token) {
-          try{
+          try {
             const { username } = jwt_decode(token);
             JoblyApi.token = token;
             const user = await JoblyApi.getUser(username);
             setUser(user);
           } catch (err) {
-            setUser(null)
-              console.log(err)
+            setUser(null);
+            console.log(err);
           }
         }
       }
@@ -44,19 +43,33 @@ function App() {
     localStorage.setItem("Token", token);
   }
 
-  function updateUser(){
-
+  async function updateUser(data) {
+    await JoblyApi.update(User.username, data);
+    setUser((user) => ({
+      ...user,
+      data,
+    }));
   }
 
+  async function setApps(jobId) {
+    await JoblyApi.apply(User.username, jobId);
 
-  function setApps(){
-
+    setUser((user) => ({
+      ...user,
+      applications: [...user.applications, jobId],
+    }));
   }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ currentUser: User, setUser:updateUser, setApplications:setApps, applications }}>
+        <UserContext.Provider
+          value={{
+            currentUser: User,
+            setUser: updateUser,
+            setApplications: setApps,
+          }}
+        >
           <Navigation />
           <RoutesList signUp={signUp} signIn={signIn} user={User} />
         </UserContext.Provider>
