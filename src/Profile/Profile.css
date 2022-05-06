@@ -20,3 +20,12 @@
   width: 25vw;
   border-radius: 5px;
 }
+
+@media (max-width: 750px){
+  .applied {
+    width: 60vw;
+  }
+  .input {
+    width: 60vw;
+  }
+}

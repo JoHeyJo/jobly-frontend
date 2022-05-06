@@ -15,3 +15,9 @@
 .link {
   text-decoration: none;
 }
+
+@media(max-width: 750px){
+  #link {
+    color: black;
+  }
+}
