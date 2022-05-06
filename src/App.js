@@ -83,6 +83,18 @@ function App() {
       applications: [...user.applications, jobId],
     }));
   }
+
+  async function unApply(jobId) {
+    console.log(jobId);
+    await JoblyApi.unApply(user.username, jobId);
+
+    let apps = user.applications.filter((job) => job !== jobId);
+
+    setUser((user) => ({
+      ...user,
+      applications: apps,
+    }));
+  }
   function updateLocation(location) {
     setLocation(location);
   }
@@ -97,6 +109,7 @@ function App() {
             currentUser: user,
             setUser: updateUser,
             setApplications: setApps,
+            unApply: unApply,
           }}
         >
           <Navigation

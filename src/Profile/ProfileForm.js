@@ -75,10 +75,15 @@ function ProfileForm() {
           onChange={handleChange}
         />
         <button>Edit User</button>
+        <div className="applied">
+          <h2>Applied to {currentUser.applications.length} jobs</h2>
+        </div>
       </form>
+
       {message &&
         message.map((msg) => (
           <h4
+            key={msg}
             className="alert alert-danger"
             style={{
               marginLeft: "700px",

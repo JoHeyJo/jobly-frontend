@@ -33,8 +33,9 @@ function CompanyDetail() {
   return (
     <div className="company-detail-card">
       <div className="company-detail">
-        <h3>{company.name}</h3>
-        <h3>{company.description}</h3>
+        <h3 style={{ marginTop: "0px" }}>{company.name}</h3>
+        <img style={{ margin: "0px" }} src={company.logoUrl} alt=""></img>
+        <h6 style={{ marginBottom: "0px" }}>{company.description}</h6>
       </div>
       <h2>Jobs</h2>
       <JobsList jobs={company.jobs} />

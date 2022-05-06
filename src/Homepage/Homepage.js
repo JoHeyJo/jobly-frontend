@@ -20,13 +20,13 @@ function Homepage() {
         <h3>Welcome back {currentUser.username}</h3>
       ) : (
         <>
-          <button className="button">
-            <Link className="link" to="/signup">
+          <button className="btn btn-secondary">
+            <Link className="linkText" to="/signup">
               Sign Up
             </Link>
           </button>
-          <button className="button">
-            <Link className="link" to="/signin">
+          <button className="btn btn-secondary">
+            <Link className="linkText" to="/signin">
               Sign In
             </Link>
           </button>

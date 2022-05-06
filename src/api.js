@@ -74,6 +74,15 @@ class JoblyApi {
     let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
     return res.user;
   }
+
+  static async unApply(username, jobId) {
+    let res = await this.request(
+      `users/${username}/jobs/${jobId}`,
+      {},
+      "delete"
+    );
+    return res;
+  }
   // obviously, you'll add a lot here ...
 }
 

@@ -2,10 +2,11 @@
   padding-top: 25vh;
 }
 
-.button {
+.btn-secondary {
   margin: 10px;
-  height: 35px;
+  color: white;
 }
-.link {
+.linkText {
   text-decoration: none;
+  color: white;
 }

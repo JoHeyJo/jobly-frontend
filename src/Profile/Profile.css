@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 .input {
@@ -11,4 +12,11 @@
   margin-bottom: 10px;
   border-radius: 5px;
   width: 25vw;
+}
+
+.applied {
+  margin-top: 15px;
+  background-color: whitesmoke;
+  width: 25vw;
+  border-radius: 5px;
 }

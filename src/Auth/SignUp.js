@@ -38,7 +38,9 @@ function SignUp({ signUp }) {
   return (
     <div>
       <form className="formDisplay" onSubmit={handleSubmit}>
-        <label forhtml="username">Username </label>
+        <label className="label" forhtml="username">
+          Username{" "}
+        </label>
         <input
           className="input"
           name="username"
@@ -46,7 +48,9 @@ function SignUp({ signUp }) {
           onChange={handleChange}
           required
         />
-        <label forhtml="password">Password </label>
+        <label className="label" forhtml="password">
+          Password{" "}
+        </label>
         <input
           className="input"
           type="password"
@@ -55,7 +59,9 @@ function SignUp({ signUp }) {
           onChange={handleChange}
           required
         />
-        <label forhtml="firstName">First Name </label>
+        <label className="label" forhtml="firstName">
+          First Name{" "}
+        </label>
         <input
           className="input"
           name="firstName"
@@ -63,7 +69,9 @@ function SignUp({ signUp }) {
           onChange={handleChange}
           required
         />
-        <label forhtml="lastName">Last Name </label>
+        <label className="label" forhtml="lastName">
+          Last Name{" "}
+        </label>
         <input
           className="input"
           name="lastName"
@@ -71,17 +79,20 @@ function SignUp({ signUp }) {
           onChange={handleChange}
           required
         />
-        <label forhtml="email">Email </label>
+        <label className="label" forhtml="email">
+          Email{" "}
+        </label>
         <input
           className="input"
           name="email"
           value={formData.email}
           onChange={handleChange}
         />
-        <button>Sign Up</button>
+        <button className="btn btn-secondary">Sign Up</button>
         {message &&
           message.map((msg) => (
             <h4
+              key={msg}
               className="alert alert-danger"
               style={{
                 marginLeft: "700px",

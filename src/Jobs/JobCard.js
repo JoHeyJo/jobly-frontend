@@ -14,7 +14,7 @@ import UserContext from "../Auth/UserContext";
  *
  */
 function JobCard({ job }) {
-  const { currentUser, setApplications } = useContext(UserContext);
+  const { currentUser, setApplications, unApply } = useContext(UserContext);
   const [message, setMessage] = useState(null);
 
   /** setApplication state with id, and show message */
@@ -30,30 +30,49 @@ function JobCard({ job }) {
     const timeId = setTimeout(() => {
       // After 5 seconds set the show value to null
       setMessage(null);
-    }, 5000);
+    }, 2350);
 
     return () => {
       clearTimeout(timeId);
     };
   }
 
+  function handleUnApply(evt) {
+    evt.preventDefault();
+
+    try {
+      unApply(job.id);
+    } catch (err) {
+      setMessage(err);
+      return;
+    }
+    setMessage("Un-Applied successfully");
+    const timeId = setTimeout(() => {
+      // After 5 seconds set the show value to null
+      setMessage(null);
+    }, 2350);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }
   return (
     <div className="JobCard">
       <h3>{job.title}</h3>
       <h3>{job.companyName}</h3>
       <h4>salary: {job.salary}</h4>
       <h4>equity: {job.equity}</h4>
-      {currentUser.applications.includes(job.id) ? (
-        !message && (
-          <button className="buttonD" disabled>
-            Applied
-          </button>
-        )
-      ) : (
-        <button className="button" onClick={handleApply}>
-          Apply
-        </button>
-      )}
+      {currentUser.applications.includes(job.id)
+        ? !message && (
+            <button className="buttonD" onClick={handleUnApply}>
+              Un-Apply
+            </button>
+          )
+        : !message && (
+            <button className="button" onClick={handleApply}>
+              Apply
+            </button>
+          )}
       <p>{message}</p>
     </div>
   );

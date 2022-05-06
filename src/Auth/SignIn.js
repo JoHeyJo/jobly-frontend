@@ -37,14 +37,18 @@ function SignIn({ signIn }) {
   return (
     <div>
       <form className="formDisplay" onSubmit={handleSubmit}>
-        <label forhtml="username">Username </label>
+        <label className="label" forhtml="username">
+          Username
+        </label>
         <input
           className="input"
           name="username"
           value={formData.username}
           onChange={handleChange}
         />
-        <label forhtml="password">Password </label>
+        <label className="label" forhtml="password">
+          Password{" "}
+        </label>
         <input
           className="input"
           type="password"
@@ -53,18 +57,21 @@ function SignIn({ signIn }) {
           onChange={handleChange}
         />
 
-        <button>Sign In</button>
+        <button className="btn btn-secondary">Sign In</button>
       </form>
-      <p
-        className="alert alert-danger"
-        style={{
-          marginLeft: "700px",
-          marginRight: "700px",
-          marginTop: "15px",
-        }}
-      >
-        {message}
-      </p>
+
+      {message && (
+        <p
+          className="alert alert-danger"
+          style={{
+            marginLeft: "700px",
+            marginRight: "700px",
+            marginTop: "15px",
+          }}
+        >
+          {message}
+        </p>
+      )}
     </div>
   );
 }

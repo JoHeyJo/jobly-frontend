@@ -7,7 +7,7 @@ import Companies from "../Companies/Companies";
 import SignUp from "../Auth/SignUp";
 import SignIn from "../Auth/SignIn";
 import ProfileForm from "../Profile/ProfileForm";
-import Applied from "../Applied";
+import Applied from "../Jobs/Applied";
 
 /** Routes for logged in and logged out users
  *
