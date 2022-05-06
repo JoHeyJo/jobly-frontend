@@ -7,6 +7,7 @@ import Companies from "../Companies/Companies";
 import SignUp from "../Auth/SignUp";
 import SignIn from "../Auth/SignIn";
 import ProfileForm from "../Profile/ProfileForm";
+import Applied from "../Applied";
 
 /** Routes for logged in and logged out users
  *
@@ -30,6 +31,7 @@ function RoutesList({ signUp, signIn, user, isLoading }) {
               <Route path="/jobs" element={<JobPage />} />
               <Route path="/companies/:handle" element={<CompanyDetail />} />
               <Route path="/profileform" element={<ProfileForm />} />
+              <Route path="/appliedjobs" element={<Applied />} />
             </>
           )}
 

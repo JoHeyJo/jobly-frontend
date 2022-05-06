@@ -62,6 +62,15 @@ function Navigation({ logout, updateLocation, location }) {
               Jobs
             </Link>
           )}
+          {location === "Applied" ? (
+            <Link className="link" style={style} to="/appliedjobs" onClick={updateLink}>
+              Applied
+            </Link>
+          ) : (
+            <Link className="link" to="/appliedjobs" onClick={updateLink}>
+              Applied
+            </Link>
+          )}
           {location === "Profile" ? (
             <Link
               className="link"
