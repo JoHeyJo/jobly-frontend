@@ -38,7 +38,7 @@ function ProfileForm() {
     setMessage("Updated Successfully");
   }
 
-  /** update formDate state */
+  /** update formData state */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({ ...data, [name]: value }));
