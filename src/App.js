@@ -6,6 +6,7 @@ import UserContext from "./Auth/UserContext";
 import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
+import React from "react";
 
 /** Jobyly App
  *
