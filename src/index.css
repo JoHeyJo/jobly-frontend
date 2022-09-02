@@ -1,5 +1,6 @@
 body {
-  /* background: url(../public/537653.webp); */
+  /* background: url(../public/blue_circles.png); */
+  background: url(img/blue_circles.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
