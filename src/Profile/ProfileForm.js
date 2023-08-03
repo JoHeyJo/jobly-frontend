@@ -68,13 +68,13 @@ function ProfileForm() {
           onChange={handleChange}
         />
         <label forhtml="email">Email </label>
-        <input
+        <input``
           className="input"
           name="email"
           value={formData.email}
           onChange={handleChange}
         />
-        <button>Edit User</button>
+        {/* <button>Edit User</button> */}
         <div className="applied">
           <h2>Applied to {currentUser.applications.length} jobs</h2>
         </div>
@@ -93,7 +93,7 @@ function ProfileForm() {
           >
             {msg}
           </h4>
-        ))}
+        ))}~
     </div>
   );
 }
