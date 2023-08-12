@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 import React from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 /** Jobyly App
  *
@@ -100,7 +101,7 @@ function App() {
     setLocation(location);
   }
 
-  if (isLoading) return <h1>loading...</h1>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="App">
